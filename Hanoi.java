@@ -11,7 +11,6 @@ public class Hanoi {
         }
         else{
             tower(disks - 1, src,spr,dest);
-
             tower(1,src,dest,spr);
             tower(disks-1,spr,dest,src);
         }
