@@ -13,6 +13,7 @@ public class CSC913 {
         Scanner myObj = new Scanner(System.in);
         int num = myObj.nextInt();
         num +=3;
+        myObj.close();
         return num;
     }
 }

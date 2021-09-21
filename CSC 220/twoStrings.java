@@ -10,6 +10,7 @@ public class twoStrings {
         String y = myObj.nextLine();
         String s = getString(x,y);
         System.out.println(s);
+        myObj.close();
 
     }
 

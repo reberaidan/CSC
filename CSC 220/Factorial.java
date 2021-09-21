@@ -10,6 +10,7 @@ public class Factorial {
         //double result = forLoop(x);
         int result = recursionLoop(x);
         System.out.println(result);
+        myObj.close();
 
     }
 

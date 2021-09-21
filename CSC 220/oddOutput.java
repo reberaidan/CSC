@@ -15,6 +15,7 @@ public class oddOutput implements ActionListener{
     
     public static void main(String[] args){
         oddOutput win = new oddOutput();
+        
     }
 
     oddOutput(){
