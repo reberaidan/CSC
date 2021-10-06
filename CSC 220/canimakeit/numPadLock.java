@@ -1,3 +1,5 @@
+package canimakeit;
+
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
@@ -13,7 +15,7 @@ public class numPadLock implements ActionListener{
     JPanel panel;
     Font myFont = new Font("Ink Free",Font.BOLD,30);
     public static void main(String[] args){
-        numPadLock code = new numPadLock();
+        new numPadLock();
     }
     numPadLock(){
         frame = new JFrame("Only Odd Inputs");
