@@ -29,7 +29,7 @@ public class Node {
 class NodeTest
 {
     public static void main(String[] args){
-        Node head;
+        /*Node head;
         Node curr;
 
         head = new Node();
@@ -78,7 +78,9 @@ class NodeTest
         System.out.println("Q's data: " + q.getData());
 
         System.out.print("List Contents: ");
-        Traverse(head);
+        Traverse(head);*/
+        BuildForward();
+        //Traverse(head);
     }
     //build and populate a linked list using array elements
     public static void BuildForward(){
@@ -106,6 +108,7 @@ class NodeTest
                 last=curr;
             }
         }
+        Traverse(first);
     }
     public static void Traverse(Node n){
         while(n !=null){
