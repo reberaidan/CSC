@@ -61,7 +61,11 @@ public class ListTest
 		System.out.println("18 a(" + a.GetSize() + "/" + a.GetPos() + ") = " + a);
 		System.out.println("19 d(" + d.GetSize() + "/" + d.GetPos() + ") = " + d);
 		System.out.println("20 a " + (a.Equals(d) ? "==" : "!=") + " d");
+		a.Last();
+		a.Prev();
+		a.Prev();
 		a.Remove();
+		a.InsertAfter(0);
 		System.out.println("21 a(" + a.GetSize() + "/" + a.GetPos() + ") = " + a);
 		System.out.println("22 d(" + d.GetSize() + "/" + d.GetPos() + ") = " + d);
 		System.out.println("23 a " + (a.Equals(d) ? "==" : "!=") + " d");

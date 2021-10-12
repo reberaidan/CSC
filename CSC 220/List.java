@@ -1,4 +1,3 @@
-
 /* ***************************************************
  * <your name>
  * <the date>
@@ -7,41 +6,95 @@
  * <a simple, short program/class description>
  *************************************************** */
 
+// the Node class
+class Node
+{
+	private int data;
+	private Node link;
+	private int index;
 
-// the EasyList class
-class List
+	// constructor
+	public Node()
+	{
+		this.data = -1;
+		this.index = -1;
+		this.link = null;
+	}
+
+	// accessor and mutator for the data component
+	public int getData()
+	{
+		return this.data;
+	}
+
+	public void setData(int data)
+	{
+		this.data = data;
+	}
+
+	public int getIndex()
+	{
+		return this.index;
+	}
+
+	public void setIndex(int index)
+	{
+		this.index = index;
+	}
+
+	// accessor and mutator for the link component
+	public Node getLink()
+	{
+		return this.link;
+	}
+
+	public void setLink(Node link)
+	{
+		this.link = link;
+	}
+}
+
+// the List class
+public class List
 {
 	public static final int MAX_SIZE = 50;
 
-	private int end;	// the index of the last valid item in the list
-	private int curr;	// the index of the current item in the list
-	private int[] list;	// the list
+	private Node head;
+	private Node tail;
+	private Node curr;
+	private int num_items;
 
 	// constructor
 	// remember that an empty list has a "size" of -1 and its "position" is at -1
 	public List()
 	{
-        this.list = new int[MAX_SIZE];
-        this.end = this.curr = -1;
+		num_items= 0;
+		this.head = this.curr = this.tail = new Node();
+		
 	}
 
 	// copy constructor
 	// clones the list l and sets the last element as the current
 	public List(List l)
 	{
-		this.list = new int[MAX_SIZE];
-		this.end = this.curr =-1;
-
-		for(int i = 0;i<l.GetSize(); i++){
-			this.InsertAfter(l.list[i]);
+		this.num_items = 0;
+		this.head = this.curr = this.tail = new Node();
+		int lCurr = l.GetPos();
+		l.First();
+		for(int i = 0; i <l.GetSize();i++){
+			this.InsertAfter(l.GetValue());
+			l.Next();
+			
 		}
+		l.SetPos(lCurr);
+		indexUpdater();
 	}
 
 	// navigates to the beginning of the list
 	public void First()
 	{
-		if(!this.IsEmpty()){
-			this.curr=0;
+		if(!(this.IsEmpty())){
+			this.curr = this.head;
 		}
 	}
 
@@ -49,8 +102,8 @@ class List
 	// the end of the list is at the last valid item in the list
 	public void Last()
 	{
-		if(!this.IsEmpty()){
-			this.curr= this.end;
+		if(!(this.IsEmpty())){
+			this.curr = this.tail;
 		}
 	}
 
@@ -59,9 +112,17 @@ class List
 	// this should not be possible for invalid positions
 	public void SetPos(int pos)
 	{
-		if(!this.IsEmpty() && pos>=0 && pos<= this.end){
-			this.curr = pos;
+		if(!(this.IsEmpty())){
+			if(pos>=0&&pos<this.tail.getIndex()+1){
+				this.curr = this.head;
+				for(int i =0; i <pos;i++){
+					this.curr = this.curr.getLink();
+				}
+			}
 		}
+
+			
+		
 	}
 
 	// navigates to the previous element
@@ -69,9 +130,10 @@ class List
 	// there should be no wrap-around
 	public void Prev()
 	{
-		if(this.curr != 0){
-			this.curr--;
+		if(!(this.IsEmpty()||(this.curr == this.head))){
+			this.SetPos(this.curr.getIndex()-1);
 		}
+
 	}
 
 	// navigates to the next element
@@ -79,33 +141,29 @@ class List
 	// there should be no wrap-around
 	public void Next()
 	{
-		if(!this.IsEmpty() && this.curr< this.end){
-			this.curr++;
+		if(!(this.IsEmpty()||(this.curr == this.tail))){
+			this.curr = this.curr.getLink();
 		}
 	}
 
 	// returns the location of the current element (or -1)
 	public int GetPos()
 	{
-        return this.curr;
+		return curr.getIndex();
+
 	}
 
 	// returns the value of the current element (or -1)
 	public int GetValue()
 	{
-        if(this.IsEmpty()){
-            return -1;
-        }
-        else{
-            return this.list[this.curr];
-        }
+		return this.curr.getData();
 	}
 
 	// returns the size of the list
 	// size does not imply capacity
 	public int GetSize()
 	{
-        return (this.end +1);
+		return this.num_items;
 	}
 
 	// inserts an item before the current element
@@ -113,20 +171,31 @@ class List
 	// this should not be possible for a full list
 	public void InsertBefore(int data)
 	{
-		// make sure the list is not full
-		if(!this.IsFull()){
-			//check if list is empty
-			if(this.IsEmpty()){
-				this.curr++;
-			}
-			// otherwise shift items to the right
-			else{
-				for(int i = this.end; i >= this.curr; i--){
-					this.list[i+1] = this.list[i];
+		if(!(this.IsFull())){
+			if(!(this.IsEmpty())){
+				
+			
+			
+				if(this.curr == this.head){
+					this.curr = new Node();
+					this.curr.setLink(this.head);
+					this.curr.setData(data);
+					this.head = this.curr;
+				}
+				else{
+					Node previous = this.head;
+					for(int i = 0; i < this.curr.getIndex()-1;i++){
+						previous = previous.getLink();
+					}
+					Node next = this.curr;
+					this.curr = new Node();
+					previous.setLink(this.curr);
+					this.curr.setLink(next);
 				}
 			}
-			this.list[this.curr] = data;
-			this.end++;
+			this.num_items++;
+			this.curr.setData(data);
+			indexUpdater();
 		}
 	}
 
@@ -136,18 +205,27 @@ class List
 	public void InsertAfter(int data)
 	{
 		if(!this.IsFull()){
-			if(this.curr == this.end){
-				this.curr++;
-				this.list[this.curr] = data;
-				this.end++;
+			if(this.IsEmpty()){
+				this.num_items=1;
+				this.head.setData(data);
+				indexUpdater();
 			}
 			else{
-				this.Next();
-				this.InsertBefore(data);
+				if(this.curr == this.tail){
+					this.num_items++;
+					this.curr = new Node();
+					this.tail.setLink(this.curr);
+					this.curr.setData(data);
+					this.tail = this.curr;
+					indexUpdater();
+				}
+				else{
+					this.Next();
+					this.InsertBefore(data);
+				}
 			}
-				
-			
 		}
+
 		
 	}
 
@@ -156,17 +234,33 @@ class List
 	public void Remove()
 	{
 		if(!this.IsEmpty()){
-			if(this.curr ==this.end){
-				this.curr -= 1;
-
-			}
-			else{
-				for(int i = this.curr; i< this.end; i++){
-					this.list[i] = this.list[i+1];
+			if(this.curr == this.head){
+				if(this.head.getLink()!=null){
+					this.curr = this.head.getLink();
+					this.head = this.curr;
+				}
+				else{
+					this.head.setIndex(-1);
 				}
 			}
-			this.end--;
-
+			else{
+				Node previous = this.head;
+				for(int i = 0; i < this.curr.getIndex()-1;i++){
+					previous = previous.getLink();
+				}
+				if(this.curr == this.tail){
+					previous.setLink(null);
+					this.curr = previous;
+					this.tail = this.curr;
+				}
+				else{
+					this.Next();
+					previous.setLink(this.curr);
+				}
+				
+			}
+			this.num_items--;
+				indexUpdater();
 		}
 	}
 
@@ -174,45 +268,62 @@ class List
 	// this should not be possible for an empty list
 	public void Replace(int data)
 	{
-		if(!this.IsEmpty()){
-			this.list[this.curr] = data;
+		if(!IsEmpty()){
+			this.curr.setData(data);
 		}
 	}
 
 	// returns if the list is empty
 	public boolean IsEmpty()
 	{
-        if(this.end == -1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+		if(this.num_items == 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+			
+		
+	}
 
 	// returns if the list is full
 	public boolean IsFull()
 	{
-        return (this.end +1 == MAX_SIZE);
+		if(this.num_items == MAX_SIZE){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	// returns if two lists are equal (by value)
 	public boolean Equals(List l)
 	{
-		boolean IsEquals = true;
-		if(l.end !=  this.end){
-			IsEquals = false;
-		}
-        if(IsEquals){for(int i = 0; i<MAX_SIZE;i++){
+		if(this.GetSize() == l.GetSize()){
+			int lCurr = l.GetPos();
+			int thisCurr = this.GetPos();
+
+			l.First();
+			this.First();
 			
-			if(this.list[i] == l.list[i] && IsEquals){
-				IsEquals = true;
+			for(int i =0; i<l.GetSize();i++){
+				if(this.curr.getData() != l.GetValue()){
+					l.SetPos(lCurr);
+					this.SetPos(thisCurr);
+					return false;
+				}
+				this.Next();
+				l.Next();
 			}
-			else{
-				IsEquals = false;
-			}
-		}}
-		return IsEquals;
+			l.SetPos(lCurr);
+			this.SetPos(thisCurr);
+			return true;
+
+		}
+		else{
+			return false;
+		}
 	}
 
 	// returns the concatenation of two lists
@@ -222,28 +333,47 @@ class List
 	// the last element of the new list is the current
 	public List Add(List l)
 	{
-        List t = new List(this);
-
-		for(int i = 0; i <l.GetSize(); i++){
-			t.InsertAfter(l.list[i]);
+		List k = new List(this);
+		int lCurr = l.GetPos();
+		k.Last();
+		l.First();
+		for(int i = 0; i <l.GetSize();i++){
+			if(k.GetSize()<=MAX_SIZE){
+				k.InsertAfter(l.GetValue());
+				l.Next();
+			}
+			
 		}
-		return t;
+		l.SetPos(lCurr);
+		return k;
+		
 	}
 
 	// returns a string representation of the entire list (e.g., 1 2 3 4 5)
 	// the string "NULL" should be returned for an empty list
 	public String toString()
 	{
-        if(IsEmpty()){
-            return "NULL";
-        }
-        else{
-            String s = "";
-            for(int i = 0;i<this.GetSize();i++){
-                s+= this.list[i] + " ";
-            }
-            return s;
-        }
-        
+		String s = " ";
+		if(this.IsEmpty()){
+			s+= "NULL";
+		}
+		else{
+			Node temp = this.head;
+			for(int i = 0; i <this.num_items; i++){
+				s+= temp.getData();
+				s+= " ";
+				temp = temp.getLink();
+			}
+		}
+		return s;
 	}
+
+
+private void indexUpdater(){
+	Node temp = this.head;
+	for(int i = 0; i <this.num_items; i++){
+		temp.setIndex(i);
+		temp = temp.getLink();
+	}
+}
 }

@@ -1,4 +1,4 @@
-public class Node {
+/*public class Node {
     private int data;
     private Node link;
 
@@ -79,7 +79,7 @@ class NodeTest
 
         System.out.print("List Contents: ");
         Traverse(head);*/
-        BuildForward();
+        /*BuildForward();
         //Traverse(head);
     }
     //build and populate a linked list using array elements
@@ -119,4 +119,4 @@ class NodeTest
         }
         System.out.println();
     }
-}
+}*/
