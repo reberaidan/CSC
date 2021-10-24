@@ -1,33 +1,33 @@
 /* ***************************************************
- * <your name>
- * <the date>
- * <the file name>
+ * Aidan Weinreber
+ * 10/18/21
+ * List.java
  *
- * <a simple, short program/class description>
+ * takes the previous linked list class and applies it to any type
  *************************************************** */
 
 // the Node class
-class Node
+class Node <mT>
 {
-	private int data;
+	private mT data;
 	private Node link;
 	private int index;
 
 	// constructor
 	public Node()
 	{
-		this.data = -1;
+		this.data = null;
 		this.index = -1;
 		this.link = null;
 	}
 
 	// accessor and mutator for the data component
-	public int getData()
+	public mT getData()
 	{
 		return this.data;
 	}
 
-	public void setData(int data)
+	public void setData(mT data)
 	{
 		this.data = data;
 	}
@@ -55,7 +55,7 @@ class Node
 }
 
 // the List class
-public class List
+public class List<mT>
 {
 	public static final int MAX_SIZE = 50;
 
@@ -82,7 +82,7 @@ public class List
 		int lCurr = l.GetPos();
 		l.First();
 		for(int i = 0; i <l.GetSize();i++){
-			this.InsertAfter(l.GetValue());
+			this.InsertAfter((mT)l.GetValue());
 			l.Next();
 			
 		}
@@ -154,9 +154,9 @@ public class List
 	}
 
 	// returns the value of the current element (or -1)
-	public int GetValue()
+	public mT GetValue()
 	{
-		return this.curr.getData();
+		return (mT)this.curr.getData();
 	}
 
 	// returns the size of the list
@@ -169,7 +169,7 @@ public class List
 	// inserts an item before the current element
 	// the new element becomes the current
 	// this should not be possible for a full list
-	public void InsertBefore(int data)
+	public void InsertBefore(mT data)
 	{
 		if(!(this.IsFull())){
 			if(!(this.IsEmpty())){
@@ -202,7 +202,7 @@ public class List
 	// inserts an item after the current element
 	// the new element becomes the current
 	// this should not be possible for a full list
-	public void InsertAfter(int data)
+	public void InsertAfter(mT data)
 	{
 		if(!this.IsFull()){
 			if(this.IsEmpty()){
@@ -266,7 +266,7 @@ public class List
 
 	// replaces the value of the current element with the specified value
 	// this should not be possible for an empty list
-	public void Replace(int data)
+	public void Replace(mT data)
 	{
 		if(!IsEmpty()){
 			this.curr.setData(data);

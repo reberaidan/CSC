@@ -1,4 +1,4 @@
-/*public class Node {
+/*public class Node1 {
     private int data;
     private Node link;
 
