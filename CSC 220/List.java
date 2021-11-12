@@ -340,7 +340,7 @@ public class List<mT>
 			// otherwise iterate through the list and display each element separated by a space
 			while (n != null)
 			{
-				s += n.getData() + " ";
+				s += n.getData() + "";
 				n = n.getLink();
 			}
 
