@@ -1,0 +1,79 @@
+lecture 1.2 ML variables and data structures
+
+IDENTIFIERS/VARIABES IN ML
+    1. Start with an uppercase letter, lowercase letter, or '
+    2. Followed by zero or more characters from step 1 including _
+
+    NOTE: We don't usually use ' to start identifiers.
+        ML will do this for a later concept.
+    
+VALUE DECLARATION
+    val <identifier> = <value>
+
+TUPLES
+    1. Start with (
+    2. Sequence of values separated by ,
+    3. End with )
+
+    If the componetns of a tuple are of type
+    T1, T2, ..., Tn, then the type of the tuple
+    shall be T1 * T2 * ... * Tn
+
+    Comparison of tuples must be of the same type
+    int * int = int * int
+    NOT int * int = int * string
+
+TUPLE OPERATOR
+    #<digit><tuple>
+
+    Evaluates to the nth component of the tuple
+    depending on the digit. Note that this is a 
+    prefix operator.
+
+LISTS
+    1. Start with [
+    2. Sequence of values of the SAME type
+        seperated by ,
+    3. End with ]
+
+    If the values in a list are of type T, then 
+    the list itself has type T list
+
+    You can have tuple in lists and lists in tuples
+
+    NOTE: List has precedence over *
+
+LIST OPERATORS
+    hd <list> 
+        Evaluates to the first element of the list
+    tl <list>
+        Evaluates to the tail of the list,
+        i.e., the list without the head
+
+NOTE: All lists have an empty list as the tail
+
+NOTE: The 'a is pronounced as the corresponding greek letter.
+    It is a placeholder for a yet to be determined type.
+
+NOTE: The synonym for [] is nil
+
+    <list1: T list> @ <list2: T list>
+        Concatenation of lists
+
+    <value: T> :: <list: T list>
+        Puts the values at the head of the list
+
+NOTE: The double colon is pronounced cons 
+    and is right associative
+
+    explode <string>
+    turns a string into a list of chars 
+
+    implode <list: char list>
+        reverse explode
+    
+    concat <string list>
+        Concatenation strings in list
+
+    length <list>
+        returns the number of elements in list

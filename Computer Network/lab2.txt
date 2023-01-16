@@ -1,0 +1,8 @@
+Client
+	ssh alw074@pc2.instageni.illinois.edu -p 26210
+
+Router
+	ssh alw074@pc2.instageni.illinois.edu -p 26211
+
+Server
+	ssh alw074@pc2.instageni.illinois.edu -p 26212

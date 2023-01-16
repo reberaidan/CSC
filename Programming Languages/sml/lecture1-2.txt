@@ -1,0 +1,4 @@
+Lecture 1-2: ML Variables and Data Structures
+
+VALUE DECLARATIONS
+	val <identifier> = <value>

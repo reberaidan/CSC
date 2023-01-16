@@ -1,0 +1,56 @@
+Lecture 1-1: ML expressions and operators
+
+ML is a functional programming language. I.e it evaluates given expressions
+
+Every expression must end with ;
+
+"val" means value
+"it" is he variable in the ML environment that contains the last expression evaluated
+":" is the ML symbolthat associates a value with a type
+
+BASIC/PRIMITIVE TYPES
+int - Constructed by an optional ~ followed by a sequence of one or more integers
+
+real - Constructed by an optional ~ followed by a sequence of one or more digits
+	a decimal point and one or more digits
+	the letter E or e, optional ~, one or more digits
+
+bool - Only two value: true, false
+
+string - Constructed by surrounding characters with ""
+
+char - #"<character>"
+
+unit - only has one value: ()
+
+INTEGER OPERATORS
++, -, *, div, mod
+
+REAL OPERATORS
++, -, *, /
+
+STRING OPERATORS
+^
+
+COMPARISON OPERATORS
+=, <, >, <=, >=, <>(not equal)
+NOTE: Cannot use <> and = on reals!
+NOTE: Expressions with these operators evaluate to bools
+
+LOGICAL OPERATORS
+andalso, orelse, not
+
+NOTE: Unitary operators have precedence
+
+IF-THEN-ELSE EXPRESSION
+The syntax for this expression is
+	if <bool expression> then <expression1: T> else <expression 2: T>
+
+This will evaluate to expression1 when the boolean is true, 
+or else to expression2 when the boolean is false
+
+NOTE: This is not flow control as in a procedural language, 
+ie we're not directing which lines of code to execute
+
+
+
